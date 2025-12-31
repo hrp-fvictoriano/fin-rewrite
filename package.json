@@ -1,0 +1,23 @@
+{
+  "name": "fin-cli",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target bun",
+    "clean": "bun unlink && rm -rfv dist",
+    "relink": "bun run build && bun link",
+    "db:clean": "rm -rf ~/.fin-cli"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "cli-table3": "^0.6.5",
+    "commander": "^14.0.2",
+    "date-fns": "^4.1.0"
+  }
+}
