@@ -1,6 +1,7 @@
 {
   "name": "fin-cli",
-  "module": "index.ts",
+  "version": "0.0.0",
+  "module": "src/index.ts",
   "type": "module",
   "private": true,
   "scripts": {
@@ -8,6 +9,9 @@
     "clean": "bun unlink && rm -rfv dist",
     "relink": "bun run build && bun link",
     "db:clean": "rm -rf ~/.fin-cli"
+  },
+  "bin": {
+    "fin": "./dist/index.js"
   },
   "devDependencies": {
     "@types/bun": "latest"

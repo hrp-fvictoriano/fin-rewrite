@@ -1,6 +1,8 @@
+type TransactionType = "income" | "expense";
+
 interface Transaction {
   id: number;
-  type: "income" | "expense";
+  type: TransactionType;
   amount: number;
   category: string;
   date: string;
@@ -10,7 +12,7 @@ interface Transaction {
 interface Category {
   id: number;
   name: string;
-  type: "income" | "expense";
+  type: TransactionType;
   disabled: boolean;
 }
 
