@@ -2,10 +2,7 @@ import { Command } from "commander";
 import Table from "cli-table3";
 import { addCategory } from "@f/categories/use-cases/add-category";
 import { getCategroies } from "@f/categories/use-cases/get-categories";
-import {
-  toggleCategory,
-  isCategoryDisabled,
-} from "@f/categories/use-cases/toggle-category";
+import { toggleCategory } from "@f/categories/use-cases/toggle-category";
 import type { Category } from "@/lib/types";
 
 function getCategoryCommand() {
