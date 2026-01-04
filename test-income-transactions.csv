@@ -1,0 +1,51 @@
+amount;date;category;message
+2500.00;2024-03-01;work;Monthly Salary
+150.00;2024-03-02;hustle;Freelance gig
+not_a_number;2024-03-03;business;Sale
+500.00;2024-03-04;work;Performance bonus
+75.50;2024-03-05;hustle;Sold old guitar
+1200.00;2024-03-06;business;Client retainer
+300.00;2024-15-99;work;Invalid date test
+45.00;2024-03-08;hustle;Tutoring
+1000.00;2024-03-09;groceries;WRONG_CATEGORY_TYPE
+250.00;2024-03-10;business;Consulting
+NULL;2024-03-11;work;Missing amount
+50.00;03-12-2024;hustle;Wrong date format
+180.00;2024-03-13;hustle;Side project
+2100.00;2024-03-14;work;Salary
+95.00;2024-03-15;crypto_gain;Invalid category test
+600.00;2024-03-16;business;Product sale
+15.00;2024-03-17;hustle;Small task
+0.00;2024-03-18;work;Zero dollar test
+550.00;2024-03-19;business;Reimbursement
+120.00;2024-03-20;hustle;Delivery work
+2500.00;[PENDING];work;Malformed date
+400.00;2024-03-22;business;Affiliate link
+35.00;2024-03-23;hustle;Garden help
+1100.00;2024-03-24;work;Paycheck
+80.00;2024-03-25;miscellaneous;WRONG_CATEGORY_TYPE
+220.00;2024-03-26;business;Licensing fee
+150.00;2024-03-27;hustle;Online sale
+4000.00;2024-03-28;work;Contract pay
+NaN;2024-03-29;business;Invalid number
+300.00;2024-03-30;hustle;Graphic design
+75.00;2024-03-31;unknown;Invalid category test
+200.00;2024-04-01;business;Ad revenue
+2600.00;2024-04-02;work;Monthly Salary
+140.00;2024-04-03;hustle;Pet sitting
+900.00;2024-04-04;business;Service fee
+-100.00;2024-04-05;work;Deduction test
+60.00;2024-04-06;hustle;Survey
+320.00;2024-04-07;business;Wholesale order
+12.00;2024-04-08;entertainment;WRONG_CATEGORY_TYPE
+2400.00;2024-04-09;work;Salary
+310.00;2024-04-10;hustle;Cleaning gig
+"5,000";2024-04-11;business;Quoted amount error
+18.50;2024-04-12;hustle;Tips
+500.00;2024-04-13;business;Resale
+1000.00;2024-04-14;work;Quarterly bonus
+25.00;2024-04-15;hustle;Used book sale
+90.00;2024-04-16;lottery;Invalid category test
+700.00;2024-04-17;business;Workshop
+1500.00;2024-04-18;work;Stipend
+45.00;2024-04-19;hustle;Car wash

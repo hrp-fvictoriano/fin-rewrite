@@ -10,8 +10,8 @@ function getCategoryCommand() {
 
   base
     .option("-l, --list", "List all categories")
-    .option("-d, --disable", "Disable a category")
-    .option("-e, --enable", "Enable a disabled category")
+    .option("-d, --disable <name>", "Disable a category")
+    .option("-e, --enable <name>", "Enable a disabled category")
     .action((opt) => {
       if (opt.list && (opt.disable || opt.enable)) {
         console.error(
@@ -62,7 +62,7 @@ function listCategories() {
   });
 
   incomeCategories.map((c) =>
-    incomeTable.push([c.name, c.disabled ? "Disabled" : "Active"]),
+    incomeTable.push([c.name, c.isDisabled ? "Disabled" : "Active"]),
   );
 
   console.log(incomeTable.toString());
@@ -73,7 +73,7 @@ function listCategories() {
   });
 
   expenseCategories.forEach((cat) => {
-    expenseTable.push([cat.name, cat.disabled ? "Disabled" : "Active"]);
+    expenseTable.push([cat.name, cat.isDisabled ? "Disabled" : "Active"]);
   });
   console.log(expenseTable.toString());
 }

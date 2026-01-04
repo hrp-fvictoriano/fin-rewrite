@@ -65,7 +65,7 @@ async function addSingleIncome(
   }
 
   //Booleans saved as ints in sqlite
-  if (Boolean(validCategory.disabled)) {
+  if (Boolean(validCategory.isDisabled)) {
     console.error(`Error: Category ${category} is disabled.`);
     process.exit(1);
   }
@@ -107,7 +107,7 @@ async function importFromCSV(filePath: string, delimiter: string) {
         console.warn(`Skipping invalid category: ${row.category}`);
         continue;
       }
-      if (cat.disabled) {
+      if (cat.isDisabled) {
         console.warn(`Skipping disabled category: ${row.category}`);
         continue;
       }

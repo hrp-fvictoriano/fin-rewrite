@@ -14,7 +14,7 @@ interface Category {
   id: number;
   name: string;
   type: TransactionType;
-  disabled: boolean;
+  isDisabled: boolean;
 }
 
 interface CSVRow {
