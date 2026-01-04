@@ -5,6 +5,7 @@ interface Transaction {
   type: TransactionType;
   amount: number;
   category: string;
+  message: string | null;
   date: string;
   createdAt: string;
 }
@@ -20,6 +21,7 @@ interface CSVRow {
   amount: string;
   date: string;
   category: string;
+  message: string | null;
 }
 
 export type { Category, CSVRow, Transaction };

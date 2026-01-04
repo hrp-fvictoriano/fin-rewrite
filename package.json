@@ -5,13 +5,12 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "bun build src/index.ts --outdir dist --target bun",
+    "build": "bun build src/index.ts --compile --outfile dist/fin",
     "clean": "bun unlink && rm -rfv dist",
-    "relink": "bun run build && bun link",
     "db:clean": "rm -rf ~/.fin-cli"
   },
   "bin": {
-    "fin": "./dist/index.js"
+    "fin": "./dist/fin"
   },
   "devDependencies": {
     "@types/bun": "latest"

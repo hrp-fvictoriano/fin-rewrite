@@ -1,4 +1,4 @@
-import { Database, type DatabaseOptions } from "bun:sqlite";
+import { Database } from "bun:sqlite";
 import { join } from "path";
 import { homedir } from "os";
 import { existsSync, mkdirSync } from "fs";
@@ -24,6 +24,8 @@ function initDB() {
         type TEXT NOT NULL CHECK(type IN ('income', 'expense')),
         amount INTEGER NOT NULL,
         category TEXT NOT NULL,
+        message TEXT,
+        date TEXT NOT NULL,
         createdAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
       )
     `);
