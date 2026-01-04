@@ -1,0 +1,51 @@
+amount;date;category;message
+42.50;2024-01-05;groceries;Weekly market
+15.00;2024-01-06;entertainment;Movie rental
+not_a_number;2024-01-07;miscellaneous;Testing invalid amount
+120.00;2024-01-08;utilities;Electricity bill
+55.20;2024-01-09;transportation;Gas refill
+200.00;2024-01-10;home;New lamp
+80.00;2024-13-40;insurance;Invalid date test
+12.30;2024-01-12;outings;Coffee
+45.00;2024-01-13;miscellaneous;Tools
+FREE;2024-01-14;groceries;Promo item
+150.00;2024-01-15;work;WRONG_CATEGORY_TYPE
+65.00;2024-01-16;home;Plumbing repair
+10.00;2024/01/17;entertainment;Wrong date format
+22.40;2024-01-18;transportation;Bus pass
+300.00;2024-01-19;insurance;Quarterly premium
+14.99;2024-01-20;utilities;Spotify
+-25.00;2024-01-21;miscellaneous;Refund received
+88.00;2024-01-22;fake_category;Invalid category test
+5.50;2024-01-23;groceries;Chocolate
+19.00;2024-01-24;outings;Drinks
+100.00;undefined;home;Missing date
+75.00;2024-01-26;utilities;Water
+60.00;2024-01-27;transportation;Uber
+12.00;2024-01-28;entertainment;Museum
+NULL;2024-01-29;insurance;Life insurance
+33.00;2024-01-30;groceries;Vegetables
+50.00;2024-01-31;home;Decor
+20.00;2024-02-01;outings;Lunch
+15.75;2024-02-02;miscellaneous;Stationery
+9.99;2024-02-03;hustle;WRONG_CATEGORY_TYPE
+45.60;2024-02-04;groceries;Breakfast items
+110.00;2024-02-05;utilities;Heating
+200.00;2024-02-06;insurance;Home insurance
+5.00;2024-02-07;transportation;Parking
+75.20;2024-02-08;entertainment;Concert ticket
+10.00;2024-02-09;home;Lightbulbs
+--.--;2024-02-10;miscellaneous;Corrupt amount
+28.40;2024-02-11;outings;Dinner
+140.00;2024-02-12;groceries;Monthly stock
+30.00;2024-02-13;transportation;Taxi
+50.00;2024-02-14;pizza_time;Invalid category test
+12.50;2024-02-15;entertainment;Book
+85.00;2024-02-16;utilities;Internet
+40.00;2024-02-17;home;Gardening
+200.00;2024-02-18;insurance;Car insurance
+3.50;2024-02-19;miscellaneous;App purchase
+22.00;2024-02-20;outings;Cinema
+55.00;2024-02-21;groceries;Detergent
+18.00;2024-02-22;transportation;Fuel
+999.00;2024-02-23;business;WRONG_CATEGORY_TYPE
