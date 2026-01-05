@@ -82,12 +82,9 @@ function addCategoryAction(name: string, type: Category["type"]) {
   try {
     addCategory({ name, type });
     console.log(`✓ Added ${type} category: ${name}`);
-  } catch (error: any) {
-    if (error.message.includes("UNIQUE constraint")) {
-      console.error(`Error: Category '${name}' already exists`);
-    } else {
-      console.error(`Error: ${error.message}`);
-    }
+  } catch (error) {
+    const err = error instanceof Error ? error : new Error(String(error));
+    console.error(`Error: ${err.message}`);
     process.exit(1);
   }
 }

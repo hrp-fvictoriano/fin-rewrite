@@ -14,6 +14,7 @@ const DEFAULT_EXPENSE_CATEGORIES = [
   "shopping",
   "subscriptions",
   "transportation",
+  "travel",
   "utilities",
 ] as const;
 

@@ -32,7 +32,7 @@ function initDB() {
   db.run(`
       CREATE TABLE IF NOT EXISTS categories (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL UNIQUE,
+        name TEXT NOT NULL,
         type TEXT NOT NULL CHECK(type IN ('income', 'expense')),
         isDisabled INTEGER NOT NULL DEFAULT 0
       )
