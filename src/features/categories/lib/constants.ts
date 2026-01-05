@@ -1,14 +1,22 @@
 const DEFAULT_EXPENSE_CATEGORIES = [
-  "miscellaneous",
-  "groceries",
-  "outings",
+  "debt",
+  "education",
   "entertainment",
+  "gifts",
   "groceries",
-  "insurance",
-  "transportation",
+  "health",
   "home",
+  "insurance",
+  "investments",
+  "miscellaneous",
+  "outings",
+  "savings",
+  "shopping",
+  "subscriptions",
+  "transportation",
   "utilities",
 ] as const;
+
 const DEFAULT_EXPENSE_CATEGORY: (typeof DEFAULT_EXPENSE_CATEGORIES)[number] =
   "miscellaneous" as const;
 
