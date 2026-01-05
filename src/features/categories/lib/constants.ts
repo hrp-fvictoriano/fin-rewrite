@@ -20,9 +20,16 @@ const DEFAULT_EXPENSE_CATEGORIES = [
 const DEFAULT_EXPENSE_CATEGORY: (typeof DEFAULT_EXPENSE_CATEGORIES)[number] =
   "miscellaneous" as const;
 
-const DEFAULT_INCOME_CATEGORIES = ["work", "business", "hustle"] as const;
+const DEFAULT_INCOME_CATEGORIES = [
+  "business",
+  "gifts",
+  "investments",
+  "miscellaneous",
+  "salary",
+  "freelance",
+] as const;
 const DEFAULT_INCOME_CATEGORY: (typeof DEFAULT_INCOME_CATEGORIES)[number] =
-  "work" as const;
+  "salary" as const;
 
 export {
   DEFAULT_EXPENSE_CATEGORIES,
