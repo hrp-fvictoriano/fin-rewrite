@@ -21,10 +21,7 @@ function getSummaryCommand() {
     .name("summary")
     .description("Generate financial summary")
     .option("-p, --prev", "Summary for previous month")
-    .option(
-      "-y, --year <YYYY>",
-      "Get the summary for the specified year",
-    )
+    .option("-y, --year <YYYY>", "Get the summary for the specified year")
     .option("-s, --start <YYYY-MM-DD>", "Start date for the summary")
     .option("-e, --end <YYYY-MM-DD>", "End date for the summary")
     .option("-f, --file", "Export to CSV file")
@@ -39,9 +36,7 @@ function getSummaryCommand() {
 
 function generateSummary(opts: any) {
   if (opts.year && (opts.start || opts.end || opts.prev)) {
-    console.error(
-      "Error: Cannot use --year with --start, --end, or --prev",
-    );
+    console.error("Error: Cannot use --year with --start, --end, or --prev");
     process.exit(1);
   }
 
@@ -90,7 +85,6 @@ function generateSummary(opts: any) {
   const catFilter = opts.categories
     ? opts.categories.split(",").map((c: string) => c.trim())
     : undefined;
-  console.log("Debug: Categories passed: ", opts.categories);
   const trans = getTransactions(
     format(startDate, DATE_STRING_FORMAT),
     format(endDate, DATE_STRING_FORMAT),
@@ -109,14 +103,12 @@ function generateSummary(opts: any) {
     summary[t.category][t.type] += t.amount;
   });
 
-  const summaryData = Object.entries(summary).map(
-    ([category, data]) => ({
-      category,
-      income: data.income.toFixed(2),
-      expense: data.expense.toFixed(2),
-      net: (data.income - data.expense).toFixed(2),
-    }),
-  );
+  const summaryData = Object.entries(summary).map(([category, data]) => ({
+    category,
+    income: data.income.toFixed(2),
+    expense: data.expense.toFixed(2),
+    net: (data.income - data.expense).toFixed(2),
+  }));
 
   const totalIncome = summaryData.reduce(
     (sum, row) => sum + parseFloat(row.income),
