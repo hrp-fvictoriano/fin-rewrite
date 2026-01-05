@@ -1,7 +1,6 @@
 import { Command } from "commander";
 import { getTransactions } from "@f/transactions/use-cases/get-transactions";
 import {
-  addDays,
   addMonths,
   endOfMonth,
   endOfYear,
@@ -10,7 +9,6 @@ import {
   parseISO,
   startOfMonth,
   startOfToday,
-  startOfYear,
 } from "date-fns";
 import { DATE_STRING_FORMAT } from "@/lib/constants";
 import { generateCSV } from "@/lib/utils/csv";
@@ -20,16 +18,17 @@ function getSummaryCommand() {
   const base = new Command("summary")
     .name("summary")
     .description("Generate financial summary")
-    .option("-p, --prev", "Summary for previous month")
-    .option("-y, --year <YYYY>", "Get the summary for the specified year")
-    .option("-s, --start <YYYY-MM-DD>", "Start date for the summary")
-    .option("-e, --end <YYYY-MM-DD>", "End date for the summary")
-    .option("-f, --file", "Export to CSV file")
-    .option("--delimiter", "CSV delimiter", ";")
     .option(
       "-c, --categories <items>",
       "Filter by categories (comma-separated)",
     )
+    .option("-p, --prev", "Summary for previous month")
+    .option("-y, --year <YYYY>", "Get the summary for the specified year")
+    .option("-s, --start <YYYY-MM-DD>", "Start date for the summary")
+    .option("-e, --end <YYYY-MM-DD>", "End date for the summary")
+    .option("-f, --file <filename>", "Export to CSV file")
+    .option("--delimiter", "CSV delimiter", ";")
+    .option("--verbose", "Show details for all transactions")
     .action((options) => generateSummary(options));
   return base;
 }
@@ -85,20 +84,17 @@ function generateSummary(opts: any) {
   const catFilter = opts.categories
     ? opts.categories.split(",").map((c: string) => c.trim())
     : undefined;
+
   const trans = getTransactions(
     format(startDate, DATE_STRING_FORMAT),
     format(endDate, DATE_STRING_FORMAT),
     catFilter,
   );
 
-  const summary: {
-    [key: string]: { income: number; expense: number };
-  } = {};
-
+  // 1. Calculate Summary Totals (needed for both UI and CSV)
+  const summary: { [key: string]: { income: number; expense: number } } = {};
   trans.forEach((t) => {
-    if (!summary[t.category]) {
-      summary[t.category] = { income: 0, expense: 0 };
-    }
+    if (!summary[t.category]) summary[t.category] = { income: 0, expense: 0 };
     //@ts-ignore
     summary[t.category][t.type] += t.amount;
   });
@@ -111,34 +107,78 @@ function generateSummary(opts: any) {
   }));
 
   const totalIncome = summaryData.reduce(
-    (sum, row) => sum + parseFloat(row.income),
+    (sum, r) => sum + parseFloat(r.income),
     0,
   );
   const totalExpense = summaryData.reduce(
-    (sum, row) => sum + parseFloat(row.expense),
+    (sum, r) => sum + parseFloat(r.expense),
     0,
   );
-  const totalNet = totalIncome - totalExpense;
 
-  summaryData.push({
-    category: "TOTAL",
-    income: totalIncome.toFixed(2),
-    expense: totalExpense.toFixed(2),
-    net: totalNet.toFixed(2),
-  });
-  /*-----------------------------------------------------*/
-  /*-------------------------CSV-------------------------*/
+  /*-------------------------EXPORT/DISPLAY-------------------------*/
+
   if (opts.file) {
-    generateCSV(summaryData, opts.file, opts.delimiter);
-    console.log(`✓ Summary exported to ${opts.file}`);
+    // If verbose and file, export individual transactions
+    // If just file, export the category summary
+    const dataToExport = opts.verbose
+      ? trans.map((t) => ({
+          date: t.date,
+          category: t.category,
+          message: t.message,
+          type: t.type,
+          amount: t.amount.toFixed(2),
+        }))
+      : [
+          ...summaryData,
+          {
+            category: "TOTAL",
+            income: totalIncome.toFixed(2),
+            expense: totalExpense.toFixed(2),
+            net: (totalIncome - totalExpense).toFixed(2),
+          },
+        ];
+
+    generateCSV(dataToExport, opts.file, opts.delimiter);
+    console.log(
+      `✓ ${opts.verbose ? "Detailed Summary" : "Summary"} exported to ${opts.file}`,
+    );
   } else {
     console.log(
-      `\n📊 Financial Summary (${format(startDate, "EEE, MMM dd, yyyy")} to ${format(endDate, "EEE, MMM dd,  yyyy")})\n`,
+      `\n📊 Financial Summary (${format(startDate, "EEE, MMM dd, yyyy")} to ${format(endDate, "EEE, MMM dd, yyyy")})\n`,
     );
-    const table = new Table({
-      head: ["Category", "Income", "Expense", "Net"],
-    });
 
+    if (opts.verbose) {
+      const categories = [...new Set(trans.map((t) => t.category))].sort();
+      categories.forEach((cat) => {
+        console.log(`\n📂 Category: ${cat.toUpperCase()}`);
+        const catTable = new Table({
+          head: ["Date", "Description", "Type", "Amount"],
+          colWidths: [12, 30, 10, 12],
+        });
+
+        trans
+          .filter((t) => t.category === cat)
+          .forEach((t) => {
+            catTable.push([
+              t.date,
+              t.message ?? "-",
+              t.type,
+              "$" + t.amount.toFixed(2),
+            ]);
+          });
+
+        console.log(catTable.toString());
+        //@ts-ignore
+        console.log(
+          //@ts-ignore
+          `Subtotal: Income $${summary[cat].income.toFixed(2)} | Expense $${summary[cat].expense.toFixed(2)}`,
+        );
+      });
+      console.log("\n" + "=".repeat(40));
+    }
+
+    // Always show summary table at bottom of console
+    const table = new Table({ head: ["Category", "Income", "Expense", "Net"] });
     summaryData.forEach((row) => {
       table.push([
         row.category,
@@ -147,10 +187,15 @@ function generateSummary(opts: any) {
         "$" + row.net,
       ]);
     });
+    table.push([
+      "TOTAL",
+      "$" + totalIncome.toFixed(2),
+      "$" + totalExpense.toFixed(2),
+      "$" + (totalIncome - totalExpense).toFixed(2),
+    ]);
 
     console.log(table.toString());
   }
-  /*-----------------------------------------------------*/
 }
 
 export { getSummaryCommand };

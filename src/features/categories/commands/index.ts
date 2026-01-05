@@ -84,6 +84,10 @@ function addCategoryAction(name: string, type: Category["type"]) {
     console.log(`✓ Added ${type} category: ${name}`);
   } catch (error) {
     const err = error instanceof Error ? error : new Error(String(error));
+    if (err.message.includes("UNIQUE")) {
+      console.error(`Error: Category ${name} already exists`);
+      process.exit(1);
+    }
     console.error(`Error: ${err.message}`);
     process.exit(1);
   }
